@@ -47,7 +47,7 @@ class SendMessageEndpoint extends DataEndpoint
      */
     public function getType(): string
     {
-        return sprintf('contacts/%s/messages', $this->contactId);
+        return sprintf('contacts/%s/send', $this->contactId);
     }
 
     /**
