@@ -14,8 +14,10 @@ namespace SmartSender\Foundation\Resources\Source\Messenger;
 use SmartSender\Exceptions\BadResponseException;
 use SmartSender\Exceptions\InvalidResponseException;
 use SmartSender\Foundation\Service;
+use SmartSender\Interaction\Endpoints\Messenger\Messages\DeleteMessageEndpoint;
 use SmartSender\Interaction\Endpoints\Messenger\Messages\EditMessageEndpoint;
 use SmartSender\Interaction\Endpoints\Messenger\Messages\SendMessageEndpoint;
+use SmartSender\Interaction\Responses\Messenger\Messages\DeleteMessageResponse;
 use SmartSender\Interaction\Responses\Messenger\Messages\EditMessageResponse;
 use SmartSender\Interaction\Responses\Messenger\Messages\SendMessageResponse;
 use SmartSender\Interaction\Endpoints\Messenger\Messages\CollectMessagesEndpoint;
@@ -55,6 +57,20 @@ class MessageService extends Service
     public function edit(int $gateId, array $resource): EditMessageResponse
     {
         return $this->createCallee()->call(new EditMessageEndpoint($gateId, $resource));
+    }
+
+    /**
+     * @param int $gateId
+     * @param array $resource
+     *
+     * @return DeleteMessageResponse
+     *
+     * @throws BadResponseException
+     * @throws InvalidResponseException
+     */
+    public function delete(int $gateId, array $resource): DeleteMessageResponse
+    {
+        return $this->createCallee()->call(new DeleteMessageEndpoint($gateId, $resource));
     }
 
     /**
